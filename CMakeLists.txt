@@ -13,7 +13,7 @@ if (NOT CMAKE_BUILD_TYPE)
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-	add_compile_definitions(__MY_DEBUG__)
+	add_compile_definitions(__TEST__)
 endif()
 
 # =======================================================
