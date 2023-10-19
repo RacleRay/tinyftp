@@ -1,22 +1,6 @@
-# for each "src/x.cpp", generate target "x"
-file(GLOB_RECURSE all_srcs CONFIGURE_DEPENDS *.cpp)
-foreach(v ${all_srcs})
-    string(REGEX MATCH "src/.*" relative_path ${v})
-    # message(${relative_path})
-    string(REGEX REPLACE "src/" "" target_name ${relative_path})
-    string(REGEX REPLACE ".cpp" "" target_name ${target_name})
 
-    add_executable(${target_name} ${v})
-endforeach()
+add_executable(server main.cpp Thread.cpp ThreadPool.cpp TaskFactory.cpp 
+    FtpLIST.cpp FtpPORT.cpp FtpRETR.cpp FtpSTOR.cpp FtpTask.cpp FtpUSER.cpp 
+    ServerCMD.cpp)
 
-
-# for each "src/x.c", generate target "x"
-file(GLOB_RECURSE all_srcs CONFIGURE_DEPENDS *.c)
-foreach(v ${all_srcs})
-    string(REGEX MATCH "src/.*" relative_path ${v})
-    # message(${relative_path})
-    string(REGEX REPLACE "src/" "" target_name ${relative_path})
-    string(REGEX REPLACE ".c" "" target_name ${target_name})
-
-    add_executable(${target_name} ${v})
-endforeach()
+target_link_options(server PRIVATE -levent -lpthread)

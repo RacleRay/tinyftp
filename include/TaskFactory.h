@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Task.h>
+#include <ServerCMD.h>
 
 class TaskFactory {
 public:
@@ -9,8 +9,8 @@ public:
         return &factory;
     }
 
-    Task createTask();
+    CmdServer createTask();
 
 private:
-    TaskFactory();
+    TaskFactory() {};
 };

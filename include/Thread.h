@@ -7,12 +7,13 @@
 #include <memory>
 #include <mutex>
 
-class Task;
+#include <ServerCMD.h>
+
 
 class Thread {
 public:
-    Thread();
-    ~Thread();
+    Thread() = default;
+    ~Thread() = default;
 
     bool setup();
 
@@ -21,7 +22,7 @@ public:
     void notify(evutil_socket_t sock) const;
     void activate();
     // void addTask(Task *task);
-    void addTask(std::unique_ptr<Task> task_uptr);
+    void addTask(std::unique_ptr<CmdServer> task_uptr);
 
     int tid = 0;
 
@@ -29,6 +30,6 @@ private:
     int notify_target_fd = 0;
     event_base *thread_evt_base = nullptr;  // 每个线程一个 even 循环，这很重要
 
-    std::list<std::unique_ptr<Task>> task_list;
+    std::list<std::unique_ptr<CmdServer>> task_list;
     std::mutex task_mutex;  // for task_list
 };

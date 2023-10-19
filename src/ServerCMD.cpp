@@ -33,7 +33,7 @@ void CmdServer::regist(const std::string &cmd, FtpTask* task) {
     task->cmd_server = this;
     
     cmd2tasks[cmd] = task;
-
+    tasks2delete.push_back(task);
 }
 
 
@@ -102,5 +102,8 @@ bool CmdServer::init() {
 
 CmdServer::~CmdServer() {
     closeDataPort();
-    // TODO: 清理Task？
+    // TODO: 清理Task
+    for (auto *task : tasks2delete) {
+        delete task;
+    }
 }

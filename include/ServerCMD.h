@@ -2,11 +2,10 @@
 
 #include <map>
 #include <memory>
+#include <vector>
 
+#include <Config.h>
 #include <FtpTask.h>
-
-
-#define BUF_SIZE 4096
 
 
 class CmdServer: public FtpTask {
@@ -18,10 +17,10 @@ public:
 
     void regist(const std::string &cmd, FtpTask *task);
 
-    CmdServer();
+    CmdServer() = default;
     ~CmdServer();
 
 private:
     std::map<std::string, FtpTask*> cmd2tasks;  // TODO: 
-    std::map<FtpTask*, int> tasks_del;
+    std::vector<FtpTask*> tasks2delete;
 };

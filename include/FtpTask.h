@@ -32,13 +32,13 @@ public:
 
     void set_callback();
     
-    bool init() override;
+    bool init() override { return true; };
 
-    virtual void parse(const std::string& type, const std::string& msg);
+    virtual void parse(const std::string& type, const std::string& msg) {};
 
-    virtual void event(bufferevent* bev, short event);
-    virtual void read(bufferevent* bev);
-    virtual void write(bufferevent* bev);
+    virtual void event(bufferevent* bev, short event) {};
+    virtual void read(bufferevent* bev) {};
+    virtual void write(bufferevent* bev) {};
 
     ~FtpTask();
 

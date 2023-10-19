@@ -26,7 +26,7 @@ void ThreadPool::init(int num_threads) {
 }
 
 
-void ThreadPool::dispatch(std::unique_ptr<Task> task) {
+void ThreadPool::dispatch(std::unique_ptr<CmdServer> task) {
     TESTOUT("main thread id: " << std::this_thread::get_id() << " ThreadPool::dispatch");
 
     if (task == nullptr) {

@@ -12,10 +12,13 @@
 #include <iostream>
 #include <string>
 
+#include <Config.h>
 #include <DebugTool.h>
+#include <ServerCMD.h>
+#include <TaskFactory.h>
 #include <ThreadPool.h>
 
-#define SERVER_PORT 21
+
 
 inline void errmsg(const std::string &msg) {
     std::cout << msg << " failed." << std::endl;
@@ -23,15 +26,18 @@ inline void errmsg(const std::string &msg) {
 
 void listen_callback(
     struct evconnlistener *listener,
-    evutil_socket_t fd,
+    evutil_socket_t sock,
     struct sockaddr *sa,
     int socklen,
     void *arg) {
     TESTOUT("main thread listen_callback");
 
     // TODO: create task
+    auto task = std::make_unique<CmdServer>(TaskFactory::get()->createTask());
+    task->conn_sock = sock;
 
     // TODO: dispatch task
+    ThreadPool::get().dispatch(std::move(task));
 }
 
 int main() {
@@ -40,6 +46,7 @@ int main() {
     }
 
     // TODO: init thread pool
+    ThreadPool::get().init(NTHREADS);
 
     // init event context
     event_base *base = event_base_new();
@@ -69,7 +76,7 @@ int main() {
 
     if (base) { event_base_free(base); }
 
-    TESTOUT("Sever down.");
+    TESTOUT("Server down.");
 
     return 0;
 }

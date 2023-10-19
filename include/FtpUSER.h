@@ -5,5 +5,5 @@
 
 class FtpUSER: public FtpTask {
 public:
-    void parse(const std::string& cmd, const std::string& arg) override;
+    void parse(const std::string& cmd, const std::string& msg) override;
 };

@@ -4,6 +4,7 @@
 #include <unistd.h>
 
 #include <DebugTool.h>
+#include <ServerCMD.h>
 #include <Task.h>
 #include <Thread.h>
 
@@ -93,13 +94,13 @@ void Thread::activate() {
         return;
     }
 
-    std::unique_ptr<Task> task = std::move(task_list.front());
+    std::unique_ptr<CmdServer> task = std::move(task_list.front());
     task_list.pop_front();
     task->init();
 }
 
 
-void Thread::addTask(std::unique_ptr<Task> task) {
+void Thread::addTask(std::unique_ptr<CmdServer> task) {
     if (task == nullptr) { return; }
 
     // 任务继承线程的libevent上下文

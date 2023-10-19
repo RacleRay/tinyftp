@@ -115,3 +115,8 @@ void FtpTask::event_callback(struct bufferevent *bev, short event, void *arg) {
     FtpTask *t = (FtpTask*)arg;
     t->event(bev, event);
 }
+
+
+FtpTask::~FtpTask() {
+    closeDataPort();
+}
