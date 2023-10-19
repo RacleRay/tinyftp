@@ -8,7 +8,6 @@
 /**
  * @brief Important for understanding FTP server working logic.
  * 
- * 
  */
 
 class FtpTask: public Task {
@@ -43,7 +42,6 @@ public:
     ~FtpTask();
 
 protected:
-    // 
     static void event_callback(bufferevent* bev, short event,void* arg);
     static void read_callback(bufferevent* bev, void* arg);
     static void write_callback(bufferevent* bev, void* arg);

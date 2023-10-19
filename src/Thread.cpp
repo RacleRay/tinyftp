@@ -61,7 +61,6 @@ bool Thread::setup() {
 }
 
 
-
 // 功能只有在 activte Thread 后，读取到管道内容，然后显示cout的提示消息而已
 void Thread::notify(evutil_socket_t sock) const {
     TESTOUT("Thread " << tid << " notified");
