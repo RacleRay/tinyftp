@@ -33,7 +33,7 @@ void CmdServer::regist(const std::string &cmd, FtpTask* task) {
     task->cmd_server = this;
     
     cmd2tasks[cmd] = task;
-    tasks2delete.push_back(task);
+    tasks2delete.insert(task);
 }
 
 

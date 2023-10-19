@@ -88,6 +88,8 @@ void FtpTask::response_cmd(std::string msg) {
     }
 
     bufferevent_write(cmd_server->bev, msg.c_str(), msg.size());
+
+    // bufferevent_flush(cmd_server->bev, EV_WRITE, BEV_FLUSH);
 }
 
 

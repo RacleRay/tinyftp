@@ -33,11 +33,11 @@ void listen_callback(
     TESTOUT("main thread listen_callback");
 
     // TODO: create task
-    auto task = std::make_unique<CmdServer>(TaskFactory::get()->createTask());
+    CmdServer* task = TaskFactory::get()->createTask();
     task->conn_sock = sock;
 
     // TODO: dispatch task
-    ThreadPool::get().dispatch(std::move(task));
+    ThreadPool::get().dispatch(task);
 }
 
 int main() {
@@ -76,7 +76,7 @@ int main() {
 
     if (base) { event_base_free(base); }
 
-    TESTOUT("Server down.");
+    TESTOUT("Server shutdown.");
 
     return 0;
 }

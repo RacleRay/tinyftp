@@ -16,7 +16,7 @@ public:
     }
 
     void init(int num_threads);
-    void dispatch(std::unique_ptr<CmdServer> task);
+    void dispatch(CmdServer* task);
 
 private:
     int m_num_threads;

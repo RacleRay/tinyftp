@@ -26,7 +26,7 @@ void ThreadPool::init(int num_threads) {
 }
 
 
-void ThreadPool::dispatch(std::unique_ptr<CmdServer> task) {
+void ThreadPool::dispatch(CmdServer* task) {
     TESTOUT("main thread id: " << std::this_thread::get_id() << " ThreadPool::dispatch");
 
     if (task == nullptr) {
@@ -36,6 +36,6 @@ void ThreadPool::dispatch(std::unique_ptr<CmdServer> task) {
     int thread_id = (m_last_thread_id + 1) % m_num_threads;
     m_last_thread_id = thread_id;
 
-    threads[thread_id]->addTask(std::move(task));
+    threads[thread_id]->addTask(task);
     threads[thread_id]->activate();
 }

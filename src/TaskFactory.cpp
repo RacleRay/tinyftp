@@ -9,22 +9,22 @@
 #include <FtpSTOR.h>
 
 
-CmdServer TaskFactory::createTask() {
+CmdServer* TaskFactory::createTask() {
     TESTOUT("TaskFactory::createTask(): creating SERVER supported tasks.\n");
 
-    CmdServer cmd = CmdServer();
+    CmdServer* cmd = new CmdServer();
 
     // regist cmd
-    cmd.regist("USER", new FtpUSER());
-    cmd.regist("PORT", new FtpPORT());
-    cmd.regist("RETR", new FtpRETR());
-    cmd.regist("STOR", new FtpSTOR());
+    cmd->regist("USER", new FtpUSER());
+    cmd->regist("PORT", new FtpPORT());
+    cmd->regist("RETR", new FtpRETR());
+    cmd->regist("STOR", new FtpSTOR());
     
     FtpTask* list = new FtpLIST();
-    cmd.regist("LIST", list);
-    cmd.regist("PWD", list);
-    cmd.regist("CWD", list);
-    cmd.regist("CDUP", list);
+    cmd->regist("LIST", list);
+    cmd->regist("PWD", list);
+    cmd->regist("CWD", list);
+    cmd->regist("CDUP", list);
 
     return cmd;
 }

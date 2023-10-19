@@ -94,13 +94,13 @@ void Thread::activate() {
         return;
     }
 
-    std::unique_ptr<CmdServer> task = std::move(task_list.front());
+    CmdServer* task = task_list.front();
     task_list.pop_front();
     task->init();
 }
 
 
-void Thread::addTask(std::unique_ptr<CmdServer> task) {
+void Thread::addTask(CmdServer* task) {
     if (task == nullptr) { return; }
 
     // 任务继承线程的libevent上下文
@@ -108,7 +108,12 @@ void Thread::addTask(std::unique_ptr<CmdServer> task) {
     task->evt_base = this->thread_evt_base;
 
     std::lock_guard<std::mutex> lock(task_mutex);
-    task_list.push_back(std::move(task));
+    task_list.push_back(task);
 }
 
 
+Thread::~Thread() {
+    for (auto* task : task_list) {
+        delete task;
+    }
+}

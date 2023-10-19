@@ -9,8 +9,8 @@ public:
         return &factory;
     }
 
-    CmdServer createTask();
+    CmdServer* createTask();
 
 private:
-    TaskFactory() {};
+    TaskFactory() = default;
 };

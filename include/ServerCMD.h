@@ -3,6 +3,7 @@
 #include <map>
 #include <memory>
 #include <vector>
+#include <set>
 
 #include <Config.h>
 #include <FtpTask.h>
@@ -22,5 +23,5 @@ public:
 
 private:
     std::map<std::string, FtpTask*> cmd2tasks;  // TODO: 
-    std::vector<FtpTask*> tasks2delete;
+    std::set<FtpTask*> tasks2delete;
 };
